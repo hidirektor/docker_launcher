@@ -84,4 +84,4 @@ This Bash script automates the setup and management of a Docker-based environmen
  Feel free to submit issues or pull requests to improve this script!
 #
 # ## License
- This project is licensed under the MIT License.
+ This project is licensed under the Apache-2.0 license.
