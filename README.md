@@ -19,18 +19,18 @@ This Bash script automates the setup and management of a Docker-based environmen
 #
 # ### 1. Clone the Repository
  ```bash
- git clone https://github.com/yourusername/mavedda-docker-setup.git
- cd mavedda-docker-setup
+ git clone https://github.com/hidirektor/docker_launcher.git
+ cd docker_launcher
  ```
 #
 # ### 2. Make the Script Executable
  ```bash
- chmod +x setup.sh
+ chmod +x launcher.sh
  ```
 #
 # ### 3. Run the Script
  ```bash
- ./setup.sh
+ ./launcher.sh
  ```
 #
 # ### 4. Configure the `.env` File
