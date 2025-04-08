@@ -95,6 +95,50 @@ services:
     restart: unless-stopped
     networks:
       - app_network
+  minio:
+    image: minio/minio
+    container_name: minio
+    ports:
+      - "9091:9091"
+      - "9099:9099"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+      MINIO_SERVER_URL: http://localhost:9099
+    volumes:
+      - minio_storage:/data
+    networks:
+      - app-network
+    command: server --address ":9099" --console-address ":9091" /data
+    restart: always
+
+  rabbitmq:
+    image: rabbitmq:3.10-rc-management-alpine
+    container_name: rabbitmq
+    ports:
+      - "5672:5672" # AMQP protocol port
+      - "15672:15672" # HTTP management UI
+    volumes:
+      - /etc/letsencrypt/live/ondergrup.hidirektor.com.tr:/certs
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_ROOT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_ROOT_PASSWORD}
+    networks:
+      - app-network
+    restart: always
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_volume_data:/data
+      - ./redis.conf:/etc/redis/redis.conf
+    command: [ "redis-server", "--include", "/etc/redis/redis.conf" ]
+    networks:
+      - app-network
+    restart: always
 
 volumes:
   portainer_data:
