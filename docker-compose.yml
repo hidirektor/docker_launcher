@@ -119,7 +119,7 @@ services:
       - "5672:5672" # AMQP protocol port
       - "15672:15672" # HTTP management UI
     volumes:
-      - /etc/letsencrypt/live/ondergrup.hidirektor.com.tr:/certs
+      - /etc/letsencrypt/live/${DOMAIN}:/certs
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_ROOT_USER}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_ROOT_PASSWORD}
